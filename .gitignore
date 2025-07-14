@@ -1,0 +1,14 @@
+# ビルド成果物
+bin/
+obj/
+*.user
+*.suo
+*.exe
+*.cache
+
+# Visual Studio
+.vs/
+
+# 機密設定ファイル
+app.config
+!app.config.sample
