@@ -50,7 +50,7 @@ namespace SeasonInfoApp {
 
             string gptAnswer = await CallOpenAI(prompt);
 
-            string imageQuery = $"{country} {month} landscape, scenery, festival, weather, nature";
+            string imageQuery = $"{country} {month} travel, city, street, culture, tourist attractions, festival, local people";
 
             ImageGalleryForm galleryForm = new ImageGalleryForm(imageQuery);
             galleryForm.Show();
