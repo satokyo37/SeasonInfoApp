@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B54993E2-4D75-4675-A9F4-2800365E3990}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>_0H04013_佐藤亨祐_uiux01</RootNamespace>
-    <AssemblyName>0H04013_佐藤亨祐_uiux01</AssemblyName>
+    <RootNamespace>_SeasonInfoApp</RootNamespace>
+    <AssemblyName>SeasonInfoApp</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -59,6 +59,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -70,12 +75,6 @@
     <Compile Include="SeasonInfoForm.Designer.cs">
       <DependentUpon>SeasonInfoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ImageGalleryForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ImageGalleryForm.Designer.cs">
-      <DependentUpon>ImageGalleryForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="app.config.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -86,11 +85,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SeasonInfoForm.resx">
       <DependentUpon>SeasonInfoForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ImageGalleryForm.resx">
-      <DependentUpon>ImageGalleryForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="app.config.sample">
@@ -104,6 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background_season.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background_gradient.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

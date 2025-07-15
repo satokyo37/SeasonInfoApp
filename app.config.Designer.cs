@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SeasonInfoApp {
+namespace _SeasonInfoApp {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
