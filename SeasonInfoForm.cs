@@ -27,6 +27,11 @@ namespace SeasonInfoApp {
         public SeasonInfoForm()
         {
             InitializeComponent();
+
+            openAIClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", OpenAIApiKey);
+            openAIClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            unsplashClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
         private void SeasonInfoForm_Load(object sender, EventArgs e)
@@ -36,12 +41,6 @@ namespace SeasonInfoApp {
 
             comboBoxCountry.SelectedItem = comboBoxCountry.Items[0];
             comboBoxMonth.SelectedItem = comboBoxMonth.Items[0];
-
-            if (!openAIClient.DefaultRequestHeaders.Contains("Authorization"))
-            {
-                openAIClient.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", OpenAIApiKey);
-            }
 
             labelCountry.BackColor = Color.Transparent;
             labelCountry.Parent = pictureBoxBackground;
@@ -70,10 +69,18 @@ namespace SeasonInfoApp {
             if (string.IsNullOrEmpty(country) || string.IsNullOrEmpty(monthStr))
             {
                 MessageBox.Show("国名と月を選択してください。");
+                buttonConfirm.Text = "実行";
+                buttonConfirm.BackColor = Color.Coral;
+                buttonConfirm.ForeColor = Color.White;
+                buttonConfirm.Enabled = true;
                 return;
             }
 
-            int month = int.Parse(monthStr.Replace("月", ""));
+            if (!int.TryParse(monthStr.Replace("月", ""), out int month))
+            {
+                MessageBox.Show("月の形式が正しくありません。");
+                return;
+            }
 
             try
             {
@@ -91,6 +98,8 @@ namespace SeasonInfoApp {
             finally
             {
                 buttonConfirm.Text = "実行";
+                buttonConfirm.BackColor = Color.Coral;
+                buttonConfirm.ForeColor = Color.White;
                 buttonConfirm.Enabled = true;
             }
         }
@@ -155,6 +164,8 @@ namespace SeasonInfoApp {
 
         private async Task LoadImagesToFlowPanel(string imageQuery)
         {
+            flowLayoutPanelImages.Controls.Clear();
+
             try
             {
                 if (string.IsNullOrEmpty(UnsplashApiKey))
@@ -170,7 +181,6 @@ namespace SeasonInfoApp {
                 string responseString = await response.Content.ReadAsStringAsync();
 
                 dynamic result = JsonConvert.DeserializeObject(responseString);
-                flowLayoutPanelImages.Controls.Clear();
 
                 foreach (var photo in result.results)
                 {
