@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
@@ -32,6 +33,50 @@ namespace SeasonInfoApp {
             openAIClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             unsplashClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            comboBoxCountry.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxMonth.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            // ComboBoxにKeyPressイベントハンドラを追加
+            comboBoxCountry.KeyPress += ComboBoxCountry_KeyPress;
+        }
+
+        // ローマ字を入力するとその文字で始まるカタカナ国名までジャンプする機能
+        private void ComboBoxCountry_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar))
+            {
+                string inputChar = e.KeyChar.ToString().ToLower();
+
+                string katakanaChar = GetKatakanaFromRomaji(inputChar);
+
+                if (!string.IsNullOrEmpty(katakanaChar))
+                {
+                    for (int i = 0; i < countries.Length; i++)
+                    {
+                        if (countries[i].StartsWith(katakanaChar))
+                        {
+                            comboBoxCountry.SelectedIndex = i;
+                            break;
+                        }
+                    }
+                }
+                e.Handled = true;
+            }
+        }
+
+        private static readonly Dictionary<string, string> RomajiToKatakana = new Dictionary<string, string>
+        {
+            ["a"] = "ア", ["b"] = "バ", ["c"] = "カ", ["d"] = "ダ", ["e"] = "エ",
+            ["f"] = "フ", ["g"] = "ガ", ["h"] = "ハ", ["i"] = "イ", ["j"] = "ジ",
+            ["k"] = "カ", ["l"] = "ラ", ["m"] = "マ", ["n"] = "ナ", ["o"] = "オ",
+            ["p"] = "パ", ["r"] = "ラ", ["s"] = "サ", ["t"] = "タ", ["u"] = "ウ",
+            ["v"] = "バ", ["w"] = "ワ", ["y"] = "ヤ", ["z"] = "ザ"
+        };
+
+        private string GetKatakanaFromRomaji(string romaji)
+        {
+            return RomajiToKatakana.TryGetValue(romaji, out string katakana) ? katakana : "";
         }
 
         private void SeasonInfoForm_Load(object sender, EventArgs e)
