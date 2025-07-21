@@ -34,9 +34,6 @@ namespace SeasonInfoApp {
 
             unsplashClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            comboBoxCountry.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxMonth.DropDownStyle = ComboBoxStyle.DropDownList;
-
             // ComboBoxにKeyPressイベントハンドラを追加
             comboBoxCountry.KeyPress += ComboBoxCountry_KeyPress;
         }
@@ -46,20 +43,11 @@ namespace SeasonInfoApp {
         {
             if (char.IsLetter(e.KeyChar))
             {
-                string inputChar = e.KeyChar.ToString().ToLower();
-
-                string katakanaChar = GetKatakanaFromRomaji(inputChar);
-
-                if (!string.IsNullOrEmpty(katakanaChar))
+                string katakana = GetKatakanaFromRomaji(e.KeyChar.ToString().ToLower());
+                if (!string.IsNullOrEmpty(katakana))
                 {
-                    for (int i = 0; i < countries.Length; i++)
-                    {
-                        if (countries[i].StartsWith(katakanaChar))
-                        {
-                            comboBoxCountry.SelectedIndex = i;
-                            break;
-                        }
-                    }
+                    int index = Array.FindIndex(countries, c => c.StartsWith(katakana));
+                    if (index >= 0) comboBoxCountry.SelectedIndex = index;
                 }
                 e.Handled = true;
             }
