@@ -44,25 +44,27 @@
             // 
             this.comboBoxCountry.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxCountry.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxCountry.Font = new System.Drawing.Font("Noto Sans JP", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.comboBoxCountry.FormattingEnabled = true;
             this.comboBoxCountry.Location = new System.Drawing.Point(11, 81);
             this.comboBoxCountry.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxCountry.Name = "comboBoxCountry";
             this.comboBoxCountry.Size = new System.Drawing.Size(289, 38);
-            this.comboBoxCountry.TabIndex = 0;
+            this.comboBoxCountry.TabIndex = 0;            
             // 
             // comboBoxMonth
             // 
             this.comboBoxMonth.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBoxMonth.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxMonth.Font = new System.Drawing.Font("Noto Sans JP", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.comboBoxMonth.FormattingEnabled = true;
             this.comboBoxMonth.Location = new System.Drawing.Point(11, 199);
             this.comboBoxMonth.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxMonth.Name = "comboBoxMonth";
             this.comboBoxMonth.Size = new System.Drawing.Size(289, 38);
-            this.comboBoxMonth.TabIndex = 0;
+            this.comboBoxMonth.TabIndex = 0;            
             // 
             // buttonConfirm
             // 
